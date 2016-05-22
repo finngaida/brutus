@@ -11,7 +11,7 @@
 		C54225791CEF09BD003112A3 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C54225781CEF09BD003112A3 /* ViewController.swift */; };
 		C542257B1CEF09BD003112A3 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = C542257A1CEF09BD003112A3 /* Assets.xcassets */; };
 		C542257E1CEF09BD003112A3 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = C542257C1CEF09BD003112A3 /* Main.storyboard */; };
-		C54225891CEF09BD003112A3 /* BrutusTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = C54225881CEF09BD003112A3 /* BrutusTests.swift */; };
+		C54225891CEF09BD003112A3 /* BrutusSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = C54225881CEF09BD003112A3 /* BrutusSpec.swift */; };
 		C54225941CF0B02A003112A3 /* ChartViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C54225931CF0B02A003112A3 /* ChartViewController.swift */; };
 		C54225961CF1D6FD003112A3 /* Crypt.swift in Sources */ = {isa = PBXBuildFile; fileRef = C54225951CF1D6FD003112A3 /* Crypt.swift */; };
 /* End PBXBuildFile section */
@@ -34,7 +34,7 @@
 		C542257D1CEF09BD003112A3 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		C542257F1CEF09BD003112A3 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		C54225841CEF09BD003112A3 /* BrutusTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = BrutusTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
-		C54225881CEF09BD003112A3 /* BrutusTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BrutusTests.swift; sourceTree = "<group>"; };
+		C54225881CEF09BD003112A3 /* BrutusSpec.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BrutusSpec.swift; sourceTree = "<group>"; };
 		C542258A1CEF09BD003112A3 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		C54225931CF0B02A003112A3 /* ChartViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ChartViewController.swift; sourceTree = "<group>"; };
 		C54225951CF1D6FD003112A3 /* Crypt.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Crypt.swift; sourceTree = "<group>"; };
@@ -95,7 +95,7 @@
 		C54225871CEF09BD003112A3 /* BrutusTests */ = {
 			isa = PBXGroup;
 			children = (
-				C54225881CEF09BD003112A3 /* BrutusTests.swift */,
+				C54225881CEF09BD003112A3 /* BrutusSpec.swift */,
 				C542258A1CEF09BD003112A3 /* Info.plist */,
 			);
 			path = BrutusTests;
@@ -212,7 +212,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				C54225891CEF09BD003112A3 /* BrutusTests.swift in Sources */,
+				C54225891CEF09BD003112A3 /* BrutusSpec.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -325,6 +325,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				COMBINE_HIDPI_IMAGES = YES;
+				DEFINES_MODULE = YES;
 				INFOPLIST_FILE = Brutus/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = de.finngaida.Brutus;
@@ -337,6 +338,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				COMBINE_HIDPI_IMAGES = YES;
+				DEFINES_MODULE = YES;
 				INFOPLIST_FILE = Brutus/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = de.finngaida.Brutus;
@@ -389,6 +391,7 @@
 				C542258F1CEF09BD003112A3 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		C54225901CEF09BD003112A3 /* Build configuration list for PBXNativeTarget "BrutusTests" */ = {
 			isa = XCConfigurationList;
@@ -397,6 +400,7 @@
 				C54225921CEF09BD003112A3 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};

@@ -10,20 +10,24 @@ import Cocoa
 
 class ChartViewController: NSViewController {
     
-    var frequencies = Array<Int>(count: 31, repeatedValue: 0)
+    var frequencies = Array<Int>(count: Crypt.abc().count, repeatedValue: 0)
     var bars = Array<NSView>()
+    var text:String?
     
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do view setup here.
         self.title = "Häufigkeitsverteilung"
         
-        let padding = self.view.frame.width / 20
-        let w = (self.view.frame.width - padding * 2) / CGFloat(Crypt.abc().count)
+        let padding:CGFloat = 20
+        let gap:CGFloat = 2
+        let w = (self.view.frame.width - padding * 2) / CGFloat(Crypt.abc().count) - gap * 2
         
         for (i, char) in Crypt.abc().enumerate() {
             
-            let bar = NSView(frame: CGRectMake(padding + w * CGFloat(i), self.view.frame.height - padding - w - 10, w, 5))
+            let gapping = gap * CGFloat(2 * i + 1)
+            let x = padding + w * CGFloat(i) + gapping
+            let bar = NSView(frame: CGRectMake(x, padding + w, w, 5))
             bar.wantsLayer = true
             bar.layer?.masksToBounds = true
             bar.layer?.cornerRadius = w / 2
@@ -32,13 +36,20 @@ class ChartViewController: NSViewController {
             bars.append(bar)
             self.view.addSubview(bar)
             
-            let foo = NSTextView(frame: CGRectMake(bar.frame.origin.x, self.view.frame.height - w - 5, w, w))
+            let foo = NSTextView(frame: CGRectMake(bar.frame.origin.x - gap, 5, w + 2 * gap, w))
             foo.insertText(char, replacementRange: NSMakeRange(0, 1))
+            foo.editable = false
+            foo.selectable = false
+            foo.backgroundColor = NSColor.clearColor()
             self.view.addSubview(foo)
+            
+            if i == Crypt.abc().count - 1 {
+                self.animate()
+            }
         }
     }
     
-    func setText(text: String?) {
+    func animate() {
         
         guard let text = text else {
             let alert = NSAlert()
@@ -56,7 +67,7 @@ class ChartViewController: NSViewController {
             
             frequencies[i] += 1
             
-            bars[i].frame = CGRectMake(bars[i].frame.origin.x, bars[i].frame.origin.y - 5, bars[i].frame.width, bars[i].frame.height + 5)
+            self.bars[i].animator().frame = CGRectMake(self.bars[i].frame.origin.x, self.bars[i].frame.origin.y, self.bars[i].frame.width, self.bars[i].frame.height + 1)
         }
     }
     

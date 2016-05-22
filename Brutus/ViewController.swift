@@ -54,8 +54,7 @@ class ViewController: NSViewController {
     @IBAction func encrypt(sender: NSButton) {
         if keyField.stringValue.characters.count > 0, let f = file {
             do {
-                let encryptedString = try Crypt.caesarCrypt(f, key: keyField.stringValue, encrypt: true)
-                print("encrypted file:\n \(f) \n to: \n \(encryptedString)")
+                let encryptedString = try Crypt.caesarCrypt(f, key: keyField.stringValue, encrypt: true, ascii: false, verbose: false)
                 
                 // let the user create a file to save to
                 let dialog = NSSavePanel()
@@ -97,8 +96,7 @@ class ViewController: NSViewController {
     @IBAction func decrypt(sender: NSButton) {
         if keyField.stringValue.characters.count > 0, let f = file {
             do {
-                let decryptedString = try Crypt.caesarCrypt(f, key: keyField.stringValue, encrypt: false)
-                print("decrypted file:\n \(f) \n to: \n \(decryptedString)")
+                let decryptedString = try Crypt.caesarCrypt(f, key: keyField.stringValue, encrypt: false, ascii: false, verbose: false)
                 
                 // let the user create a file to save to
                 let dialog = NSSavePanel()
@@ -137,7 +135,7 @@ class ViewController: NSViewController {
     
     override func prepareForSegue(segue: NSStoryboardSegue, sender: AnyObject?) {
         if segue.identifier == "showChart", let dest = segue.destinationController as? ChartViewController {
-            dest.setText(file)
+            dest.text = file
         }
     }
     

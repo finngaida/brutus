@@ -8,39 +8,38 @@
 
 import Foundation
 
-class Crypt: NSObject {
+public class Crypt: NSObject {
     
-    enum E:ErrorType {
+    public enum E:ErrorType {
         case ConversionError, UnicodeConversion, NoKeysArray, CharacterUnknown(s:Character), Unknown
     }
     
-    static func abc() -> Array<String> { return ["a", "b", "c", "d", "e", "f", "g", "h", "i", "j", "k", "l", "m", "n", "o", "p", "q", "r", "s", "t", "u", "v", "w", "x", "y", "z", "A", "B", "C", "D", "E",  "F",  "G",  "H",  "I",  "J",  "K",  "L",  "M",  "N",  "O",  "P",  "Q",  "R",  "S",  "T",  "U",  "V",  "W",  "X",  "Y", "Z", " ", ".", ",", "-", "?", "!"] }
+    public static func abc() -> Array<String> { return ["a", "ä", "b", "c", "d", "e", "f", "g", "h", "i", "j", "k", "l", "m", "n", "o", "ö", "p", "q", "r", "s", "ß", "t", "u", "ü", "v", "w", "x", "y", "z", "A", "Ä", "B", "C", "D", "E",  "F",  "G",  "H",  "I",  "J",  "K",  "L",  "M",  "N",  "O", "Ö",  "P",  "Q",  "R",  "S",  "T",  "U", "Ü",  "V",  "W",  "X",  "Y", "Z", "0", "1", "2", "3", "4", "5", "6", "7", "8", "9", " ", ".", ",", "-", "?", "!", "\n"] }
     
-    class func caesarCrypt(s:String, key:String, encrypt:Bool) throws -> String {
+    public class func caesarCrypt(s:String, key:String, encrypt:Bool, ascii: Bool, verbose: Bool) throws -> String {
         
-        let ascii = false
-        var uKeys:[UInt32]?
+        var uKeys:[Int]?
         var result = String()
         
-        func c2I(c:Character) throws -> UInt32 {
+        func c2I(c:Character) throws -> Int {
             if ascii {
                 guard let f = String(c).unicodeScalars.first else { throw E.UnicodeConversion }
-                return f.value
+                return Int(f.value)
             } else if let i = Crypt.abc().indexOf(String(c)) {
-                return UInt32(i)
+                return i
             } else {
                 throw E.CharacterUnknown(s: c)
             }
         }
         
-        func i2S(i:UInt32) -> String? {
+        func i2S(i:Int) -> String? {
             if ascii {
                 return String(UnicodeScalar(i))
             } else if Int(i) < 0 {
                 return Crypt.abc()[Crypt.abc().count - (abs(Int(i)) % Crypt.abc().count)]
-            } else if Crypt.abc().count >= Int(i) {
+            } else if Crypt.abc().count > Int(i) {
                 return Crypt.abc()[Int(i)]
-            } else if Crypt.abc().count < Int(i) {
+            } else if Crypt.abc().count <= Int(i) {
                 return Crypt.abc()[Int(i) % Crypt.abc().count]
             } else {
                 return nil
@@ -48,7 +47,7 @@ class Crypt: NSObject {
         }
         
         do {
-            uKeys = try key.characters.map { (char) -> UInt32 in
+            uKeys = try key.characters.map { (char) -> Int in
                 do {
                     return try c2I(char)
                 } catch let e as E {
@@ -70,6 +69,11 @@ class Crypt: NSObject {
                 
                 guard let encS = i2S(encCode) else { throw E.ConversionError }
                 result += encS
+                
+                if verbose {
+                    let en = encrypt ? "en" : "de"
+                    print("\(en)crypting \(c): code \(cCode), key \(key), new code \(encCode), new string \(encS)")
+                }
                 
             } catch let e as E {
                 throw e

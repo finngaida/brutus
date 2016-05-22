@@ -738,13 +738,13 @@
             <objects>
                 <viewController title="Häufigkeitsanalyse" id="6pJ-Ld-UyL" customClass="ChartViewController" customModule="Brutus" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" id="YyK-EY-Nfq">
-                        <rect key="frame" x="0.0" y="0.0" width="450" height="300"/>
+                        <rect key="frame" x="0.0" y="0.0" width="1100" height="300"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </view>
                 </viewController>
                 <customObject id="JZm-nk-gfs" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="648" y="598"/>
+            <point key="canvasLocation" x="994" y="598"/>
         </scene>
     </scenes>
 </document>

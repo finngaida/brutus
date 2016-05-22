@@ -6,7 +6,8 @@
 //  Copyright © 2016 Finn Gaida. All rights reserved.
 //
 
-import XCTest
+import Quick
+import Nimble
 @testable import Brutus
 
 class BrutusTests: XCTestCase {
