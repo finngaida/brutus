@@ -10,20 +10,19 @@ import Cocoa
 
 class ChartViewController: NSViewController {
     
-    var frequencies = Array<Int>(count: Crypt.abc().count, repeatedValue: 0)
     var bars = Array<NSView>()
     var text:String?
+    let padding:CGFloat = 20
+    let gap:CGFloat = 5
     
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do view setup here.
         self.title = "Häufigkeitsverteilung"
         
-        let padding:CGFloat = 20
-        let gap:CGFloat = 2
-        let w = (self.view.frame.width - padding * 2) / CGFloat(Crypt.abc().count) - gap * 2
+        let w = (self.view.frame.width - padding * 2) / CGFloat(Crypt.shortAbc().count) - gap * 2
         
-        for (i, char) in Crypt.abc().enumerate() {
+        for (i, char) in Crypt.shortAbc().enumerate() {
             
             let gapping = gap * CGFloat(2 * i + 1)
             let x = padding + w * CGFloat(i) + gapping
@@ -36,14 +35,14 @@ class ChartViewController: NSViewController {
             bars.append(bar)
             self.view.addSubview(bar)
             
-            let foo = NSTextView(frame: CGRectMake(bar.frame.origin.x - gap, 5, w + 2 * gap, w))
+            let foo = NSTextView(frame: CGRectMake(bar.frame.origin.x, 5, w + 2 * gap, w))
             foo.insertText(char, replacementRange: NSMakeRange(0, 1))
             foo.editable = false
             foo.selectable = false
             foo.backgroundColor = NSColor.clearColor()
             self.view.addSubview(foo)
             
-            if i == Crypt.abc().count - 1 {
+            if i == Crypt.shortAbc().count - 1 {
                 self.animate()
             }
         }
@@ -60,14 +59,21 @@ class ChartViewController: NSViewController {
             return
         }
         
-        for t in text.characters {
-            guard let i = Crypt.abc().indexOf(String(t)) else { print("couldn't locate \(String(t))"); break }
-            guard frequencies.count >= i else { print("frequencies array too short for \(String(t))"); break }
-            guard bars.count >= i else { print("bars array too short for \(String(t))"); break }
+        let frequency = Crypt.frequencies(text)
+        let max = CGFloat(frequency.values.maxElement() ?? 1.0)
+        _ = try? Crypt.caesarCrack(text, accuracy: 3, ascii: false, verbose: false)
+        
+        for (i, t) in Crypt.shortAbc().enumerate() {
+            guard bars.count >= i else { print("bars array too short for \(t)"); break }
             
-            frequencies[i] += 1
-            
-            self.bars[i].animator().frame = CGRectMake(self.bars[i].frame.origin.x, self.bars[i].frame.origin.y, self.bars[i].frame.width, self.bars[i].frame.height + 1)
+            if let freq = frequency[t] {
+                let b = self.bars[i]
+                let h = (self.view.frame.height - b.frame.origin.y - padding) * CGFloat(freq) / max
+                print("the frequency for \(t) is \(freq) with bar \(h)")
+                
+                b.animator().frame = CGRectMake(b.frame.origin.x, b.frame.origin.y, b.frame.width, h)
+                
+            } else { print("can't get frequency for \(t) in round \(i)") }
         }
     }
     

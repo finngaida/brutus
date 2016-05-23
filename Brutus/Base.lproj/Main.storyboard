@@ -738,7 +738,7 @@
             <objects>
                 <viewController title="Häufigkeitsanalyse" id="6pJ-Ld-UyL" customClass="ChartViewController" customModule="Brutus" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" id="YyK-EY-Nfq">
-                        <rect key="frame" x="0.0" y="0.0" width="1100" height="300"/>
+                        <rect key="frame" x="0.0" y="0.0" width="1100" height="600"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </view>
                 </viewController>
