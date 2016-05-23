@@ -11,6 +11,8 @@ import Cocoa
 class ChartViewController: NSViewController {
     
     var bars = Array<NSView>()
+    var oldBars = Array<NSView>()
+    var label:NSTextView?
     var text:String?
     let padding:CGFloat = 20
     let gap:CGFloat = 5
@@ -26,12 +28,22 @@ class ChartViewController: NSViewController {
             
             let gapping = gap * CGFloat(2 * i + 1)
             let x = padding + w * CGFloat(i) + gapping
+            
+            let oldBar = NSView(frame: CGRectMake(x, padding + w, w, 5))
+            oldBar.wantsLayer = true
+            oldBar.layer?.masksToBounds = true
+            oldBar.layer?.cornerRadius = w / 2
+            oldBar.layer?.backgroundColor = NSColor(calibratedRed: 0.141, green: 0.420, blue: 0.380, alpha: 1.00).CGColor
+            oldBar.alphaValue = 1.0
+            oldBars.append(oldBar)
+            self.view.addSubview(oldBar)
+            
             let bar = NSView(frame: CGRectMake(x, padding + w, w, 5))
             bar.wantsLayer = true
             bar.layer?.masksToBounds = true
             bar.layer?.cornerRadius = w / 2
             bar.layer?.backgroundColor = NSColor(calibratedRed: 0.631, green: 0.212, blue: 0.275, alpha: 1.00).CGColor
-            //            bar.tag = i
+            bar.alphaValue = 0.8
             bars.append(bar)
             self.view.addSubview(bar)
             
@@ -60,20 +72,66 @@ class ChartViewController: NSViewController {
         }
         
         let frequency = Crypt.frequencies(text)
+        let intern = Crypt.internalNormality()
         let max = CGFloat(frequency.values.maxElement() ?? 1.0)
-        _ = try? Crypt.caesarCrack(text, accuracy: 3, ascii: false, verbose: false)
-        
-        for (i, t) in Crypt.shortAbc().enumerate() {
-            guard bars.count >= i else { print("bars array too short for \(t)"); break }
+        do {
+            let crypt = try Crypt.caesarCrack(text, accuracy: 3, ascii: false, verbose: false)
             
-            if let freq = frequency[t] {
-                let b = self.bars[i]
-                let h = (self.view.frame.height - b.frame.origin.y - padding) * CGFloat(freq) / max
-                print("the frequency for \(t) is \(freq) with bar \(h)")
+            label = NSTextView(frame: CGRectMake(self.view.frame.width / 2 - 100, self.view.frame.height - 100, 200, 50))
+            label?.insertText("Key: \(crypt.0)", replacementRange: NSMakeRange(0, 1))
+            label?.font = NSFont.systemFontOfSize(50)
+            label?.editable = false
+            label?.selectable = false
+            label?.backgroundColor = NSColor.clearColor()
+            self.view.addSubview(label!)
+            
+            for (i, t) in Crypt.shortAbc().enumerate() {
+                guard bars.count >= i && oldBars.count >= i else { print("bars array too short for \(t)"); break }
                 
-                b.animator().frame = CGRectMake(b.frame.origin.x, b.frame.origin.y, b.frame.width, h)
+                if let freq = frequency[t] {
+                    let b = self.bars[i]
+                    let h = (self.view.frame.height - b.frame.origin.y - padding) * CGFloat(freq) / max
+                    
+                    b.animator().frame = CGRectMake(b.frame.origin.x, b.frame.origin.y, b.frame.width, h)
+                    
+                } else {
+                    // print("can't get frequency for \(t) in round \(i)") 
+                }
                 
-            } else { print("can't get frequency for \(t) in round \(i)") }
+                if let freq = intern[t] {
+                    let b = self.oldBars[i]
+                    let h = (self.view.frame.height - b.frame.origin.y - padding) * CGFloat(freq) / max
+                    b.animator().frame = CGRectMake(b.frame.origin.x, b.frame.origin.y, b.frame.width, h)
+                    
+                } else {
+                    // print("can't get frequency for \(t) in round \(i)")
+                }
+            }
+            
+            // let the user create a file to save to
+            let dialog = NSSavePanel()
+            dialog.title = "Erstelle eine Datei zum Sichern"
+            dialog.showsResizeIndicator = true
+            dialog.showsHiddenFiles = false
+            dialog.canCreateDirectories = true
+            dialog.allowedFileTypes = ["txt"]
+            
+            if (dialog.runModal() == NSModalResponseOK) {
+                if let result = dialog.URL, path = result.path {
+                    NSFileManager.defaultManager().createFileAtPath(path, contents: crypt.1.dataUsingEncoding(NSUTF8StringEncoding), attributes: [:])
+                } else {
+                    print("an error occured unwrapping \(dialog)")
+                    let alert = NSAlert()
+                    alert.messageText = "Das hat leider nicht funktioniert."
+                    alert.addButtonWithTitle("Okay")
+                    alert.runModal()
+                }
+            } else {
+                return
+            }
+            
+        } catch let e {
+            print("there was an error: \(e)")
         }
     }
     

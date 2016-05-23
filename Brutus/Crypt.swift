@@ -11,7 +11,7 @@ import Foundation
 public class Crypt: NSObject {
     
     public enum E:ErrorType {
-        case ConversionError, UnicodeConversion, NoKeysArray, CharacterUnknown(s:String), Unknown
+        case ConversionError, UnicodeConversion, NoKeysArray, CharacterUnknown(s:String), CouldntCrack, Unknown
     }
     
     public static func abc() -> Array<String> { return ["a", "ä", "b", "c", "d", "e", "f", "g", "h", "i", "j", "k", "l", "m", "n", "o", "ö", "p", "q", "r", "s", "ß", "t", "u", "ü", "v", "w", "x", "y", "z", "A", "Ä", "B", "C", "D", "E",  "F",  "G",  "H",  "I",  "J",  "K",  "L",  "M",  "N",  "O", "Ö",  "P",  "Q",  "R",  "S",  "T",  "U", "Ü",  "V",  "W",  "X",  "Y", "Z", "0", "1", "2", "3", "4", "5", "6", "7", "8", "9", " ", ".", ",", "-", "?", "!", "\n"] }
@@ -111,23 +111,43 @@ public class Crypt: NSObject {
         
     }
     
-    public class func caesarCrack(s:String, accuracy:Int, ascii:Bool, verbose:Bool) throws -> String {
+    public class func caesarCrack(s:String, accuracy:Int, ascii:Bool, verbose:Bool) throws -> (String, String) {
         
         let sortedFrequencies = Crypt.frequencies(s).sort { $0.1 > $1.1 }
         let sortedNormality = internalNormality().sort { $0.1 > $1.1 }
         
+        var last = 0
         for (i, tuple) in sortedFrequencies[0..<accuracy].enumerate() {
             do {
                 let freqC = try s2I(tuple.0, ascii: ascii)
                 let normC = try s2I(sortedNormality[i].0, ascii: ascii)
-                let offset = freqC - normC
-                print("offset: \(offset) freq \(freqC) \(tuple.0) norm \(normC) \(sortedNormality[i].0)")
+                
+                if freqC - normC != last && last != 0 {
+                    throw E.CouldntCrack
+                } else {
+                    last = freqC - normC
+                }
+                
+                if verbose {
+                    print("offset: \(last) freq \(freqC) \(tuple.0) norm \(normC) \(sortedNormality[i].0)")
+                }
             } catch let e as E {
                 print("couldn't convert string to int: \(e)")
             }
         }
         
-        return ""
+        guard let key = i2S(last, ascii: ascii) else {
+            if verbose {
+                print("the int key is \(last), but has no alphanumeric counterpart")
+            }
+            throw E.CouldntCrack
+        }
+        
+        do {
+            return (key, try Crypt.caesarCrypt(s, key: key, encrypt: false, ascii: ascii, verbose: verbose))
+        } catch let e as E {
+            throw e
+        }
     }
     
     public static func internalNormality() -> Dictionary<String,Double> {
