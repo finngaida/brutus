@@ -695,7 +695,7 @@
                             </button>
                             <button verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="xsq-mY-Lsf">
                                 <rect key="frame" x="256" y="43" width="124" height="32"/>
-                                <buttonCell key="cell" type="push" title="Entschlüsseln" bezelStyle="rounded" alignment="center" enabled="NO" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="FrI-ft-pKb">
+                                <buttonCell key="cell" type="push" title="Cracken" bezelStyle="rounded" alignment="center" enabled="NO" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="FrI-ft-pKb">
                                     <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
                                     <font key="font" metaFont="system"/>
                                 </buttonCell>

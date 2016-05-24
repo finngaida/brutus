@@ -75,11 +75,12 @@ class ChartViewController: NSViewController {
         let intern = Crypt.internalNormality()
         let max = CGFloat(frequency.values.maxElement() ?? 1.0)
         do {
-            let crypt = try Crypt.caesarCrack(text, accuracy: 3, ascii: false, verbose: false)
+            let crypt = try Crypt.caesarCrack(text, accuracy: 2, ascii: false, verbose: false)
+            let keys = crypt.reduce("") { $0 + ", " + $1.0 }
             
-            label = NSTextView(frame: CGRectMake(self.view.frame.width / 2 - 100, self.view.frame.height - 100, 200, 50))
-            label?.insertText("Key: \(crypt.0)", replacementRange: NSMakeRange(0, 1))
-            label?.font = NSFont.systemFontOfSize(50)
+            label = NSTextView(frame: CGRectMake(self.view.frame.width / 2 - 100, self.view.frame.height - 150, 200, 50))
+            label?.insertText("Key: \(keys)", replacementRange: NSMakeRange(0, 1))
+            label?.font = NSFont.systemFontOfSize(30)
             label?.editable = false
             label?.selectable = false
             label?.backgroundColor = NSColor.clearColor()
@@ -108,26 +109,29 @@ class ChartViewController: NSViewController {
                 }
             }
             
-            // let the user create a file to save to
-            let dialog = NSSavePanel()
-            dialog.title = "Erstelle eine Datei zum Sichern"
-            dialog.showsResizeIndicator = true
-            dialog.showsHiddenFiles = false
-            dialog.canCreateDirectories = true
-            dialog.allowedFileTypes = ["txt"]
-            
-            if (dialog.runModal() == NSModalResponseOK) {
-                if let result = dialog.URL, path = result.path {
-                    NSFileManager.defaultManager().createFileAtPath(path, contents: crypt.1.dataUsingEncoding(NSUTF8StringEncoding), attributes: [:])
+            for enText in crypt {
+                
+                // let the user create a file to save to
+                let dialog = NSSavePanel()
+                dialog.title = "Erstelle eine Datei zum Sichern"
+                dialog.showsResizeIndicator = true
+                dialog.showsHiddenFiles = false
+                dialog.canCreateDirectories = true
+                dialog.allowedFileTypes = ["txt"]
+                
+                if (dialog.runModal() == NSModalResponseOK) {
+                    if let result = dialog.URL, path = result.path {
+                        NSFileManager.defaultManager().createFileAtPath(path, contents: enText.1.dataUsingEncoding(NSUTF8StringEncoding), attributes: [:])
+                    } else {
+                        print("an error occured unwrapping \(dialog)")
+                        let alert = NSAlert()
+                        alert.messageText = "Das hat leider nicht funktioniert."
+                        alert.addButtonWithTitle("Okay")
+                        alert.runModal()
+                    }
                 } else {
-                    print("an error occured unwrapping \(dialog)")
-                    let alert = NSAlert()
-                    alert.messageText = "Das hat leider nicht funktioniert."
-                    alert.addButtonWithTitle("Okay")
-                    alert.runModal()
+                    return
                 }
-            } else {
-                return
             }
             
         } catch let e {

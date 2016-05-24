@@ -21,6 +21,13 @@ class ViewController: NSViewController {
         super.viewDidLoad()
         
         // Do any additional setup after loading the view.
+        NSNotificationCenter.defaultCenter().addObserverForName(NSControlTextDidChangeNotification, object: nil, queue: NSOperationQueue.currentQueue()) { (notif) in
+            if self.keyField.stringValue == "" {
+                self.decryptButton.title = "Cracken"
+            } else {
+                self.decryptButton.title = "Entschlüsseln"
+            }
+        }
     }
     
     @IBAction func chooseFile(sender: NSButton) {
