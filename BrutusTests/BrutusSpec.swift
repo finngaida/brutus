@@ -7,21 +7,33 @@
 //
 
 import XCTest
+import Quick
+import Nimble
 @testable import Brutus
 
-class BrutusTests: XCTestCase {
+class BrutusSpec: QuickSpec {
     
-    func testCaesarInternalEncrypt() {
+    override func spec() {
         
-        let testString = "abcDEF123!.-"
-        let key = "b"
-        
-        //        do {
-        //            let encrypted = try Crypt.caesarCrypt(testString, key:key, encrypt:true, ascii: false, verbose: false)
-        //            XCTAssertEqual(encrypted, "bdeFGH345a-!")
-        //        } catch let e as E {
-        //            XCTFail("failed, because \(e)")
-        //        }
+        context("BrutusSpecs.swift") {
+            
+            describe("check the hardcoded alphabet arrays of the `abc`, `shortAbc` and `narmality` functions") {
+                
+                it("should contain 26 letters + 3 umlaute (x2 because Uppercase) + 10 numbers + .,- !? (6)") {
+                    
+                    expect(Crypt.abc().count).to(equal((26 + 3) * 2 + 10 + 6))
+                    
+                }
+                
+                it("should contain 26 letters + 3 umlaute + .,-!? (5)") {
+                    
+                    expect(Crypt.shortAbc().count).to(equal(26 + 3 + 5))
+                    
+                }
+                
+            }
+            
+        }
         
     }
     

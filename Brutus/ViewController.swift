@@ -69,6 +69,7 @@ class ViewController: NSViewController {
                 dialog.showsResizeIndicator = true
                 dialog.showsHiddenFiles = false
                 dialog.canCreateDirectories = true
+                dialog.nameFieldStringValue = "Verschlüsselt"
                 dialog.allowedFileTypes = ["txt"]
                 
                 if (dialog.runModal() == NSModalResponseOK) {
@@ -111,6 +112,7 @@ class ViewController: NSViewController {
                 dialog.showsResizeIndicator = true
                 dialog.showsHiddenFiles = false
                 dialog.canCreateDirectories = true
+                dialog.nameFieldStringValue = "Entschlüsselt"
                 dialog.allowedFileTypes = ["txt"]
                 
                 if (dialog.runModal() == NSModalResponseOK) {

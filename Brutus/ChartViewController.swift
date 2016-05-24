@@ -109,7 +109,7 @@ class ChartViewController: NSViewController {
                 }
             }
             
-            for enText in crypt {
+            for (i, enText) in crypt.enumerate() {
                 
                 // let the user create a file to save to
                 let dialog = NSSavePanel()
@@ -117,6 +117,7 @@ class ChartViewController: NSViewController {
                 dialog.showsResizeIndicator = true
                 dialog.showsHiddenFiles = false
                 dialog.canCreateDirectories = true
+                dialog.nameFieldStringValue = "Entschlüsselt-Option-\(i+1)"
                 dialog.allowedFileTypes = ["txt"]
                 
                 if (dialog.runModal() == NSModalResponseOK) {
