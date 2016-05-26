@@ -1,0 +1,424 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 46;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		C501A3171CF4CA2900D3C89F /* BrutusSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = C54225881CEF09BD003112A3 /* BrutusSpec.swift */; };
+		C501A3181CF4CA4E00D3C89F /* Quick.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C5C11EC91CF49E0E002662A2 /* Quick.framework */; };
+		C501A3191CF4CA4E00D3C89F /* Nimble.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C5C11EC71CF49DE2002662A2 /* Nimble.framework */; };
+		C54225771CEF09BD003112A3 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = C54225761CEF09BD003112A3 /* AppDelegate.swift */; };
+		C54225791CEF09BD003112A3 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C54225781CEF09BD003112A3 /* ViewController.swift */; };
+		C542257B1CEF09BD003112A3 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = C542257A1CEF09BD003112A3 /* Assets.xcassets */; };
+		C542257E1CEF09BD003112A3 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = C542257C1CEF09BD003112A3 /* Main.storyboard */; };
+		C54225941CF0B02A003112A3 /* ChartViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C54225931CF0B02A003112A3 /* ChartViewController.swift */; };
+		C54225961CF1D6FD003112A3 /* Crypt.swift in Sources */ = {isa = PBXBuildFile; fileRef = C54225951CF1D6FD003112A3 /* Crypt.swift */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		C5C11EE21CF49EA2002662A2 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = C542256B1CEF09BD003112A3 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = C54225721CEF09BD003112A3;
+			remoteInfo = Brutus;
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXFileReference section */
+		C54225731CEF09BD003112A3 /* Brutus.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Brutus.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		C54225761CEF09BD003112A3 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
+		C54225781CEF09BD003112A3 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
+		C542257A1CEF09BD003112A3 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		C542257D1CEF09BD003112A3 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
+		C542257F1CEF09BD003112A3 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		C54225881CEF09BD003112A3 /* BrutusSpec.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BrutusSpec.swift; sourceTree = "<group>"; };
+		C542258A1CEF09BD003112A3 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		C54225931CF0B02A003112A3 /* ChartViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ChartViewController.swift; sourceTree = "<group>"; };
+		C54225951CF1D6FD003112A3 /* Crypt.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Crypt.swift; sourceTree = "<group>"; };
+		C5C11EC71CF49DE2002662A2 /* Nimble.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Nimble.framework; sourceTree = "<group>"; };
+		C5C11EC91CF49E0E002662A2 /* Quick.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Quick.framework; sourceTree = "<group>"; };
+		C5C11EDD1CF49EA2002662A2 /* BrutusTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = BrutusTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		C54225701CEF09BD003112A3 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		C5C11EDA1CF49EA2002662A2 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				C501A3181CF4CA4E00D3C89F /* Quick.framework in Frameworks */,
+				C501A3191CF4CA4E00D3C89F /* Nimble.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		C542256A1CEF09BD003112A3 = {
+			isa = PBXGroup;
+			children = (
+				C54225751CEF09BD003112A3 /* Brutus */,
+				C54225871CEF09BD003112A3 /* BrutusTests */,
+				C54225741CEF09BD003112A3 /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		C54225741CEF09BD003112A3 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				C54225731CEF09BD003112A3 /* Brutus.app */,
+				C5C11EDD1CF49EA2002662A2 /* BrutusTests.xctest */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		C54225751CEF09BD003112A3 /* Brutus */ = {
+			isa = PBXGroup;
+			children = (
+				C54225761CEF09BD003112A3 /* AppDelegate.swift */,
+				C54225781CEF09BD003112A3 /* ViewController.swift */,
+				C54225931CF0B02A003112A3 /* ChartViewController.swift */,
+				C54225951CF1D6FD003112A3 /* Crypt.swift */,
+				C542257A1CEF09BD003112A3 /* Assets.xcassets */,
+				C542257C1CEF09BD003112A3 /* Main.storyboard */,
+				C542257F1CEF09BD003112A3 /* Info.plist */,
+			);
+			path = Brutus;
+			sourceTree = "<group>";
+		};
+		C54225871CEF09BD003112A3 /* BrutusTests */ = {
+			isa = PBXGroup;
+			children = (
+				C5C11EC91CF49E0E002662A2 /* Quick.framework */,
+				C5C11EC71CF49DE2002662A2 /* Nimble.framework */,
+				C54225881CEF09BD003112A3 /* BrutusSpec.swift */,
+				C542258A1CEF09BD003112A3 /* Info.plist */,
+			);
+			path = BrutusTests;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		C54225721CEF09BD003112A3 /* Brutus */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = C542258D1CEF09BD003112A3 /* Build configuration list for PBXNativeTarget "Brutus" */;
+			buildPhases = (
+				C542256F1CEF09BD003112A3 /* Sources */,
+				C54225701CEF09BD003112A3 /* Frameworks */,
+				C54225711CEF09BD003112A3 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = Brutus;
+			productName = Brutus;
+			productReference = C54225731CEF09BD003112A3 /* Brutus.app */;
+			productType = "com.apple.product-type.application";
+		};
+		C5C11EDC1CF49EA2002662A2 /* BrutusTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = C5C11EE41CF49EA2002662A2 /* Build configuration list for PBXNativeTarget "BrutusTests" */;
+			buildPhases = (
+				C5C11ED91CF49EA2002662A2 /* Sources */,
+				C5C11EDA1CF49EA2002662A2 /* Frameworks */,
+				C5C11EDB1CF49EA2002662A2 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				C5C11EE31CF49EA2002662A2 /* PBXTargetDependency */,
+			);
+			name = BrutusTests;
+			productName = BrutusTests;
+			productReference = C5C11EDD1CF49EA2002662A2 /* BrutusTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		C542256B1CEF09BD003112A3 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastSwiftUpdateCheck = 0730;
+				LastUpgradeCheck = 0730;
+				ORGANIZATIONNAME = "Finn Gaida";
+				TargetAttributes = {
+					C54225721CEF09BD003112A3 = {
+						CreatedOnToolsVersion = 7.3;
+					};
+					C5C11EDC1CF49EA2002662A2 = {
+						CreatedOnToolsVersion = 7.3;
+						TestTargetID = C54225721CEF09BD003112A3;
+					};
+				};
+			};
+			buildConfigurationList = C542256E1CEF09BD003112A3 /* Build configuration list for PBXProject "Brutus" */;
+			compatibilityVersion = "Xcode 3.2";
+			developmentRegion = English;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+			);
+			mainGroup = C542256A1CEF09BD003112A3;
+			productRefGroup = C54225741CEF09BD003112A3 /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				C54225721CEF09BD003112A3 /* Brutus */,
+				C5C11EDC1CF49EA2002662A2 /* BrutusTests */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		C54225711CEF09BD003112A3 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				C542257B1CEF09BD003112A3 /* Assets.xcassets in Resources */,
+				C542257E1CEF09BD003112A3 /* Main.storyboard in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		C5C11EDB1CF49EA2002662A2 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		C542256F1CEF09BD003112A3 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				C54225961CF1D6FD003112A3 /* Crypt.swift in Sources */,
+				C54225791CEF09BD003112A3 /* ViewController.swift in Sources */,
+				C54225771CEF09BD003112A3 /* AppDelegate.swift in Sources */,
+				C54225941CF0B02A003112A3 /* ChartViewController.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		C5C11ED91CF49EA2002662A2 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				C501A3171CF4CA2900D3C89F /* BrutusSpec.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		C5C11EE31CF49EA2002662A2 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = C54225721CEF09BD003112A3 /* Brutus */;
+			targetProxy = C5C11EE21CF49EA2002662A2 /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
+/* Begin PBXVariantGroup section */
+		C542257C1CEF09BD003112A3 /* Main.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				C542257D1CEF09BD003112A3 /* Base */,
+			);
+			name = Main.storyboard;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
+/* Begin XCBuildConfiguration section */
+		C542258B1CEF09BD003112A3 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				CODE_SIGN_IDENTITY = "-";
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				MACOSX_DEPLOYMENT_TARGET = 10.11;
+				MTL_ENABLE_DEBUG_INFO = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = macosx;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+			};
+			name = Debug;
+		};
+		C542258C1CEF09BD003112A3 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				CODE_SIGN_IDENTITY = "-";
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				MACOSX_DEPLOYMENT_TARGET = 10.11;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				SDKROOT = macosx;
+			};
+			name = Release;
+		};
+		C542258E1CEF09BD003112A3 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				COMBINE_HIDPI_IMAGES = YES;
+				DEFINES_MODULE = YES;
+				FRAMEWORK_SEARCH_PATHS = "$(inherited)";
+				INFOPLIST_FILE = Brutus/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = de.finngaida.Brutus;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Debug;
+		};
+		C542258F1CEF09BD003112A3 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				COMBINE_HIDPI_IMAGES = YES;
+				DEFINES_MODULE = YES;
+				FRAMEWORK_SEARCH_PATHS = "$(inherited)";
+				INFOPLIST_FILE = Brutus/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = de.finngaida.Brutus;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Release;
+		};
+		C5C11EE51CF49EA2002662A2 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				COMBINE_HIDPI_IMAGES = YES;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/BrutusTests",
+				);
+				INFOPLIST_FILE = BrutusTests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = de.finngaida.BrutusTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Brutus.app/Contents/MacOS/Brutus";
+			};
+			name = Debug;
+		};
+		C5C11EE61CF49EA2002662A2 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				COMBINE_HIDPI_IMAGES = YES;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/BrutusTests",
+				);
+				INFOPLIST_FILE = BrutusTests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = de.finngaida.BrutusTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Brutus.app/Contents/MacOS/Brutus";
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		C542256E1CEF09BD003112A3 /* Build configuration list for PBXProject "Brutus" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				C542258B1CEF09BD003112A3 /* Debug */,
+				C542258C1CEF09BD003112A3 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		C542258D1CEF09BD003112A3 /* Build configuration list for PBXNativeTarget "Brutus" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				C542258E1CEF09BD003112A3 /* Debug */,
+				C542258F1CEF09BD003112A3 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		C5C11EE41CF49EA2002662A2 /* Build configuration list for PBXNativeTarget "BrutusTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				C5C11EE51CF49EA2002662A2 /* Debug */,
+				C5C11EE61CF49EA2002662A2 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = C542256B1CEF09BD003112A3 /* Project object */;
+}
