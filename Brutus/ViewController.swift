@@ -14,6 +14,9 @@ class ViewController: NSViewController {
     @IBOutlet weak var encryptButton: NSButton!
     @IBOutlet weak var decryptButton: NSButton!
     @IBOutlet weak var keyField: NSTextField!
+    @IBOutlet weak var useAscii: NSButton!
+    @IBOutlet weak var useVerbose: NSButton!
+    @IBOutlet weak var useShortAlphabet: NSButton!
     
     var file:String?
     
@@ -61,7 +64,7 @@ class ViewController: NSViewController {
     @IBAction func encrypt(sender: NSButton) {
         if keyField.stringValue.characters.count > 0, let f = file {
             do {
-                let encryptedString = try Crypt.caesarCrypt(f, key: keyField.stringValue, encrypt: true, ascii: false, verbose: false)
+                let encryptedString = try Crypt.caesarCrypt(f, key: keyField.stringValue, encrypt: true, ascii: Bool(useAscii.state), verbose: Bool(useVerbose.state))
                 
                 // let the user create a file to save to
                 let dialog = NSSavePanel()
@@ -104,7 +107,7 @@ class ViewController: NSViewController {
     @IBAction func decrypt(sender: NSButton) {
         if keyField.stringValue.characters.count > 0, let f = file {
             do {
-                let decryptedString = try Crypt.caesarCrypt(f, key: keyField.stringValue, encrypt: false, ascii: false, verbose: false)
+                let decryptedString = try Crypt.caesarCrypt(f, key: keyField.stringValue, encrypt: false, ascii: Bool(useAscii.state), verbose: Bool(useVerbose.state))
                 
                 // let the user create a file to save to
                 let dialog = NSSavePanel()
