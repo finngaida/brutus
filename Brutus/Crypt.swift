@@ -169,12 +169,11 @@ public class Crypt: NSObject {
             }
         }
         
-        if result.characters.count == s.characters.count {
-            return result
-        } else {
-            throw E.CouldntCrack(reason: "result character count mismatch")
+        if result.characters.count != s.characters.count && verbose {
+            print("the output char count does not match the input file")
         }
         
+        return result
     }
     
     /**
