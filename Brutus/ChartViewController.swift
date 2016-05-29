@@ -14,6 +14,8 @@ class ChartViewController: NSViewController {
     var oldBars = Array<NSView>()
     var label:NSTextView?
     var text:String?
+    var verbose:Bool = false
+    var ascii:Bool = false
     let padding:CGFloat = 20
     let gap:CGFloat = 5
     
@@ -75,7 +77,7 @@ class ChartViewController: NSViewController {
         let intern = Crypt.internalNormality()
         let max = CGFloat(frequency.values.maxElement() ?? 1.0)
         do {
-            let crypt = try Crypt.caesarCrack(text, accuracy: 2, ascii: false, verbose: false)
+            let crypt = try Crypt.caesarCrack(text, accuracy: 2, ascii: self.ascii, verbose: self.verbose)
             let keys = crypt.reduce("") { $0 + ", " + $1.0 }
             
             label = NSTextView(frame: CGRectMake(self.view.frame.width / 2 - 100, self.view.frame.height - 150, 200, 50))

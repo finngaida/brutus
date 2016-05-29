@@ -21,7 +21,7 @@ public class Crypt: NSObject {
      - Unknown:           No idea what happened
      */
     public enum E:ErrorType {
-        case ConversionError(i: Any), UnicodeConversion(i: Any), NoKeysArray, CharacterUnknown(s:String), CouldntCrack, Unknown
+        case ConversionError(i: Any), UnicodeConversion(i: Any), NoKeysArray, CharacterUnknown(s:String), CouldntCrack(reason: String), Unknown
     }
     
     /**
@@ -80,7 +80,7 @@ public class Crypt: NSObject {
      */
     public class func i2S(i:Int, ascii:Bool) -> String? {
         if ascii {
-            return String(UnicodeScalar(i))
+            return String(UnicodeScalar(abs(i)))        // TODO: wrap around instead of abs
         } else if Int(i) < 0 {
             return Crypt.abc()[Crypt.abc().count - (abs(Int(i)) % Crypt.abc().count)]
         } else if Crypt.abc().count > Int(i) {
@@ -172,7 +172,7 @@ public class Crypt: NSObject {
         if result.characters.count == s.characters.count {
             return result
         } else {
-            throw E.Unknown
+            throw E.CouldntCrack(reason: "result character count mismatch")
         }
         
     }
@@ -214,14 +214,14 @@ public class Crypt: NSObject {
                         
                         keys.append(key)
                     } else  {
-                        throw E.CouldntCrack
+                        throw E.CouldntCrack(reason: "Found too many different keys")
                     }
                     
-                    if !verbose {
+                    if verbose {
                         print("offset: \(last) freq \(freqC) \(iTuple.0) norm \(normC) \(jTuple.0)")
                     }
                 } catch let e as E {
-                    print("couldn't convert string to int: \(e)")
+                    print("couldn't convert string to int: \(e) ascii: \(ascii)")
                 }
             }
         }

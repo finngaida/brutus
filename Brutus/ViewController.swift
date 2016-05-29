@@ -48,7 +48,7 @@ class ViewController: NSViewController {
             if let result = dialog.URL, path = result.path {
                 do {
                     openFileButton.title = result.lastPathComponent ?? "Datei öffnen"
-                    file = try String(contentsOfFile: path)
+                    file = try String(contentsOfFile: path, encoding: NSUTF8StringEncoding)
                     encryptButton.enabled = true
                     decryptButton.enabled = true
                 } catch let e as NSError {
@@ -148,6 +148,8 @@ class ViewController: NSViewController {
     override func prepareForSegue(segue: NSStoryboardSegue, sender: AnyObject?) {
         if segue.identifier == "showChart", let dest = segue.destinationController as? ChartViewController {
             dest.text = file
+            dest.ascii = Bool(self.useAscii.state)
+            dest.verbose = Bool(self.useVerbose.state)
         }
     }
     
