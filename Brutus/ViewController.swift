@@ -24,7 +24,7 @@ class ViewController: NSViewController {
         super.viewDidLoad()
         
         // Do any additional setup after loading the view.
-        NSNotificationCenter.defaultCenter().addObserverForName(NSControlTextDidChangeNotification, object: nil, queue: NSOperationQueue.currentQueue()) { (notif) in
+        NotificationCenter.default().addObserver(forName: NSNotification.Name.NSControlTextDidChange, object: nil, queue: OperationQueue.current()) { (notif) in
             if self.keyField.stringValue == "" {
                 self.decryptButton.title = "Cracken"
             } else {
@@ -33,7 +33,7 @@ class ViewController: NSViewController {
         }
     }
     
-    @IBAction func chooseFile(sender: NSButton) {
+    @IBAction func chooseFile(_ sender: NSButton) {
         
         let dialog = NSOpenPanel()
         dialog.title = "Wähle eine .txt Datei"
@@ -45,12 +45,12 @@ class ViewController: NSViewController {
         dialog.allowedFileTypes = ["txt"]
         
         if (dialog.runModal() == NSModalResponseOK) {
-            if let result = dialog.URL, path = result.path {
+            if let result = dialog.url, path = result.path {
                 do {
                     openFileButton.title = result.lastPathComponent ?? "Datei öffnen"
-                    file = try String(contentsOfFile: path, encoding: NSUTF8StringEncoding)
-                    encryptButton.enabled = true
-                    decryptButton.enabled = true
+                    file = try String(contentsOfFile: path, encoding: String.Encoding.utf8)
+                    encryptButton.isEnabled = true
+                    decryptButton.isEnabled = true
                 } catch let e as NSError {
                     print("an error occurred: \(e.description)")
                     NSAlert(error: e).runModal()
@@ -61,7 +61,7 @@ class ViewController: NSViewController {
         }
     }
     
-    @IBAction func encrypt(sender: NSButton) {
+    @IBAction func encrypt(_ sender: NSButton) {
         if keyField.stringValue.characters.count > 0, let f = file {
             do {
                 let encryptedString = try Crypt.caesarCrypt(f, key: keyField.stringValue, encrypt: true, ascii: Bool(useAscii.state), verbose: Bool(useVerbose.state))
@@ -76,13 +76,13 @@ class ViewController: NSViewController {
                 dialog.allowedFileTypes = ["txt"]
                 
                 if (dialog.runModal() == NSModalResponseOK) {
-                    if let result = dialog.URL, path = result.path {
-                        NSFileManager.defaultManager().createFileAtPath(path, contents: encryptedString.dataUsingEncoding(NSUTF8StringEncoding), attributes: [:])
+                    if let result = dialog.url, path = result.path {
+                        FileManager.default().createFile(atPath: path, contents: encryptedString.data(using: String.Encoding.utf8), attributes: [:])
                     } else {
                         print("an error occured unwrapping \(dialog)")
                         let alert = NSAlert()
                         alert.messageText = "Das hat leider nicht funktioniert."
-                        alert.addButtonWithTitle("Okay")
+                        alert.addButton(withTitle: "Okay")
                         alert.runModal()
                     }
                 } else {
@@ -93,18 +93,18 @@ class ViewController: NSViewController {
                 print("an error occured: \(e)")
                 let alert = NSAlert()
                 alert.messageText = "Das hat leider nicht funktioniert. Grund: \n \(e)"
-                alert.addButtonWithTitle("Okay")
+                alert.addButton(withTitle: "Okay")
                 alert.runModal()
             }
         } else {
             let alert = NSAlert()
             alert.messageText = "Bitte einen Schlüssel eingeben"
-            alert.addButtonWithTitle("Okay")
+            alert.addButton(withTitle: "Okay")
             alert.runModal()
         }
     }
     
-    @IBAction func decrypt(sender: NSButton) {
+    @IBAction func decrypt(_ sender: NSButton) {
         if keyField.stringValue.characters.count > 0, let f = file {
             do {
                 let decryptedString = try Crypt.caesarCrypt(f, key: keyField.stringValue, encrypt: false, ascii: Bool(useAscii.state), verbose: Bool(useVerbose.state))
@@ -119,13 +119,13 @@ class ViewController: NSViewController {
                 dialog.allowedFileTypes = ["txt"]
                 
                 if (dialog.runModal() == NSModalResponseOK) {
-                    if let result = dialog.URL, path = result.path {
-                        NSFileManager.defaultManager().createFileAtPath(path, contents: decryptedString.dataUsingEncoding(NSUTF8StringEncoding), attributes: [:])
+                    if let result = dialog.url, path = result.path {
+                        FileManager.default().createFile(atPath: path, contents: decryptedString.data(using: String.Encoding.utf8), attributes: [:])
                     } else {
                         print("an error occured unwrapping \(dialog)")
                         let alert = NSAlert()
                         alert.messageText = "Das hat leider nicht funktioniert."
-                        alert.addButtonWithTitle("Okay")
+                        alert.addButton(withTitle: "Okay")
                         alert.runModal()
                     }
                 } else {
@@ -136,16 +136,16 @@ class ViewController: NSViewController {
                 print("an error occured: \(e)")
                 let alert = NSAlert()
                 alert.messageText = "Das hat leider nicht funktioniert. Grund: \n \(e)"
-                alert.addButtonWithTitle("Okay")
+                alert.addButton(withTitle: "Okay")
                 alert.runModal()
             }
         } else {
-            self.performSegueWithIdentifier("showChart", sender: self)
+            self.performSegue(withIdentifier: "showChart", sender: self)
         }
     }
     
     
-    override func prepareForSegue(segue: NSStoryboardSegue, sender: AnyObject?) {
+    override func prepare(for segue: NSStoryboardSegue, sender: AnyObject?) {
         if segue.identifier == "showChart", let dest = segue.destinationController as? ChartViewController {
             dest.text = file
             dest.ascii = Bool(self.useAscii.state)

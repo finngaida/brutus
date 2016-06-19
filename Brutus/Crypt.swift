@@ -20,8 +20,8 @@ public class Crypt: NSObject {
      - CouldntCrack:      A valid key for the given text couldn't be found
      - Unknown:           No idea what happened
      */
-    public enum E:ErrorType {
-        case ConversionError(i: Any), UnicodeConversion(i: Any), NoKeysArray, CharacterUnknown(s:String), CouldntCrack(reason: String), Unknown
+    public enum E:ErrorProtocol {
+        case conversionError(i: Any), unicodeConversion(i: Any), noKeysArray, characterUnknown(s:String), couldntCrack(reason: String), unknown
     }
     
     /**
@@ -59,14 +59,14 @@ public class Crypt: NSObject {
      
      - returns: the int value
      */
-    public class func s2I(s:String, ascii:Bool) throws -> Int {
+    public class func s2I(_ s:String, ascii:Bool) throws -> Int {
         if ascii {
-            guard let f = s.unicodeScalars.first else { throw E.UnicodeConversion(i: s) }
+            guard let f = s.unicodeScalars.first else { throw E.unicodeConversion(i: s) }
             return Int(f.value)
-        } else if let i = Crypt.abc().indexOf(s) {
+        } else if let i = Crypt.abc().index(of: s) {
             return i
         } else {
-            throw E.CharacterUnknown(s: s)
+            throw E.characterUnknown(s: s)
         }
     }
     
@@ -78,7 +78,7 @@ public class Crypt: NSObject {
      
      - returns: The string value
      */
-    public class func i2S(i:Int, ascii:Bool) -> String? {
+    public class func i2S(_ i:Int, ascii:Bool) -> String? {
         if ascii {
             return String(UnicodeScalar(abs(i)))        // TODO: wrap around instead of abs
         } else if Int(i) < 0 {
@@ -99,10 +99,10 @@ public class Crypt: NSObject {
      
      - returns: A dictionary containing perone amounts of how often the key appears in `s`
      */
-    public class func frequencies(s:String) -> Dictionary<String,Double> {
+    public class func frequencies(_ s:String) -> Dictionary<String,Double> {
         var ret = Dictionary<String,Double>()
         s.characters.forEach { (c) in
-            let d = String(c).lowercaseString
+            let d = String(c).lowercased()
             if let f = ret[d] {
                 ret[d] = f + 1
             } else {
@@ -130,7 +130,7 @@ public class Crypt: NSObject {
      
      - returns: The en-/decrypted string
      */
-    public class func caesarCrypt(s:String, key:String, encrypt:Bool, ascii: Bool, verbose: Bool) throws -> String {
+    public class func caesarCrypt(_ s:String, key:String, encrypt:Bool, ascii: Bool, verbose: Bool) throws -> String {
         
         var uKeys:[Int]?
         var result = String()
@@ -147,16 +147,16 @@ public class Crypt: NSObject {
             throw e
         }
         
-        guard let keys = uKeys else { throw E.NoKeysArray }
+        guard let keys = uKeys else { throw E.noKeysArray }
         
-        for (i, c) in s.characters.enumerate() {
+        for (i, c) in s.characters.enumerated() {
             let key = keys[i%keys.count]
             
             do {
                 let cCode = try s2I(String(c), ascii: ascii)
                 let encCode = encrypt ? cCode + key : cCode - key
                 
-                guard let encS = i2S(encCode, ascii: ascii) else { throw E.ConversionError(i: encCode) }
+                guard let encS = i2S(encCode, ascii: ascii) else { throw E.conversionError(i: encCode) }
                 result += encS
                 
                 if verbose {
@@ -188,15 +188,15 @@ public class Crypt: NSObject {
      
      - returns: An array of possible (key, decrypted text) pairs
      */
-    public class func caesarCrack(s:String, accuracy:Int, ascii:Bool, verbose:Bool) throws -> [(String, String)] {
+    public class func caesarCrack(_ s:String, accuracy:Int, ascii:Bool, verbose:Bool) throws -> [(String, String)] {
         
-        let sortedFrequencies = Crypt.frequencies(s).sort { $0.1 > $1.1 }
-        let sortedNormality = internalNormality().sort { $0.1 > $1.1 }
+        let sortedFrequencies = Crypt.frequencies(s).sorted { $0.1 > $1.1 }
+        let sortedNormality = internalNormality().sorted { $0.1 > $1.1 }
         
         var last = 0
         var keys = Array<String>()
-        for (_, iTuple) in sortedFrequencies[0..<accuracy].enumerate() {
-            for (_, jTuple) in sortedNormality[0..<accuracy].enumerate() {
+        for (_, iTuple) in sortedFrequencies[0..<accuracy].enumerated() {
+            for (_, jTuple) in sortedNormality[0..<accuracy].enumerated() {
                 do {
                     let freqC = try s2I(iTuple.0, ascii: ascii)
                     let normC = try s2I(jTuple.0, ascii: ascii)
@@ -208,12 +208,12 @@ public class Crypt: NSObject {
                             if verbose {
                                 print("the int key is \(last), but has no alphanumeric counterpart")
                             }
-                            throw E.UnicodeConversion(i: last)
+                            throw E.unicodeConversion(i: last)
                         }
                         
                         keys.append(key)
                     } else  {
-                        throw E.CouldntCrack(reason: "Found too many different keys")
+                        throw E.couldntCrack(reason: "Found too many different keys")
                     }
                     
                     if verbose {

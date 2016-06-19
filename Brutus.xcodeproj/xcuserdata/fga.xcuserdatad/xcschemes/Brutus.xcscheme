@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Scheme
-   LastUpgradeVersion = "0730"
+   LastUpgradeVersion = "0800"
    version = "1.3">
    <BuildAction
       parallelizeBuildables = "YES"
@@ -32,7 +32,7 @@
             skipped = "NO">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "C54225831CEF09BD003112A3"
+               BlueprintIdentifier = "C5C11EDC1CF49EA2002662A2"
                BuildableName = "BrutusTests.xctest"
                BlueprintName = "BrutusTests"
                ReferencedContainer = "container:Brutus.xcodeproj">
